@@ -2,6 +2,11 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { APP_BASE_HREF } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+registerLocaleData(localePt);
 
 import { AppComponent } from './app.component';
 import { MenuComponent } from './navegacao/menu/menu.component';
@@ -12,6 +17,8 @@ import { ContatoComponent } from './institucional/contato/contato.component';
 import { rootRouterConfig } from './app.routes';
 import { DatabindingComponent } from './demos/databinding/databinding.component';
 import { FormsModule } from '@angular/forms';
+import { ProdutoService } from './produtos/produto.service';
+import { ListaProdutoComponent } from './produtos/lista-produto/lista-produto.component';
 
 @NgModule({
   declarations: [
@@ -22,14 +29,17 @@ import { FormsModule } from '@angular/forms';
     SobreComponent,
     ContatoComponent,
     DatabindingComponent,
+    ListaProdutoComponent
   ],
   imports: [
     BrowserModule,
     [RouterModule.forRoot(rootRouterConfig, { useHash: false })],
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [
-    {provide: APP_BASE_HREF, useValue: '/'}
+    {provide: APP_BASE_HREF, useValue: '/'},
+    ProdutoService,
   ],
   bootstrap: [AppComponent]
 })
